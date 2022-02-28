@@ -5,10 +5,18 @@ from datetime import datetime
 
 
 class BaseModel():
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
+
+        if kwargs:
+            for key, value in kwargs.items():
+                if key != '__class__':
+                    if key == 'created_at' or key == 'updated_at':
+                        self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                    else:
+                        self.key = value
 
     def __str__(self):
         return (f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}')
