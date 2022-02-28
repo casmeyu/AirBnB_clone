@@ -5,7 +5,9 @@ from datetime import datetime
 
 
 class BaseModel():
+    """ Base Class for all the objects in the system"""
     def __init__(self, *args, **kwargs):
+        """ initialize the base class with a random id and creation dates """
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
@@ -22,9 +24,13 @@ class BaseModel():
         return (f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}')
 
     def save(self):
+        """ Saves a JSON representation of the object
+            using the file_storage engine
+        """
         self.updated_at = datetime.now()
 
     def to_dict(self):
+        """ Returns a dictionary representation of the object """
         dict_new = {"__class__": self.__class__.__name__}
         for key in self.__dict__:
             if key == "created_at" or key == "updated_at":
