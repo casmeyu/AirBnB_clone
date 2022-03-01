@@ -10,14 +10,16 @@ class HBTNCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
     def do_quit(self, command):
-        """quit - exits the program"""
-        print('quitting')
+        """Quit command to exit the program"""
         return True
 
     def do_EOF(self, command):
-        """end of file - exits the program"""
+        """End of File exits the program"""
         return True
 
+    def emptyline(self):
+        """Prints a new line"""
+        pass
 
 
 if __name__ == '__main__':

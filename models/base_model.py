@@ -13,7 +13,8 @@ class BaseModel():
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key == 'created_at' or key == 'updated_at':
-                        setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                        formato = '%Y-%m-%dT%H:%M:%S.%f'
+                        setattr(self, key, datetime.strptime(value, formato))
                     else:
                         setattr(self, key, value)
         else:
@@ -28,10 +29,9 @@ class BaseModel():
     def save(self):
         """ Saves a JSON representation of the object
             using the file_storage engine
-        """ 
+        """
         self.updated_at = datetime.now()
         models.storage.save()
-
 
     def to_dict(self):
         """ Returns a dictionary representation of the object """
