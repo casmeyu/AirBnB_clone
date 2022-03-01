@@ -23,7 +23,7 @@ class HBTNCommand(cmd.Cmd):
     # object manipulation
     def do_create(self, command):
         """Creates an instance of the desired class
-        Usage: create <class_name>
+Usage: create <class_name>
         """
         if len(command) < 1:
             print('** class name missing **')
@@ -37,14 +37,14 @@ class HBTNCommand(cmd.Cmd):
 
     def do_show(self, command):
         """Prints string representation of an instance of a class based on id
-        Usage: show <class_name> <id>
+Usage: show <class_name> <id>
         """
         if len(command) < 1:
             print('** class name missing **')
             return
 
         line = command.split()
-        
+
         if self.check_class(line[0]):
             if len(line) < 2:
                 print('** instance id missing **')
@@ -59,7 +59,22 @@ class HBTNCommand(cmd.Cmd):
 and updates the data base
 Usage: destroy <class_name> <id>
         """
-        print(f'destroying {line}')
+        if len(command) < 1:
+            print('** class name missing **')
+            return
+
+        line = command.split()
+
+        if self.check_class(line[0]):
+            if len(line) < 2:
+                print('** instance id missing **')
+                return
+
+            try:
+                del(storage.all()[f'{line[0]}.{line[1]}'])
+                storage.save()
+            except Exception as ex:
+                print('** no instance found **')
 
     def do_all(self, command):
         """Prints the string representation of all the instances of a class
