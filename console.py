@@ -11,6 +11,15 @@ from models import storage
 class HBTNCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
+    # validation functions
+    def check_class(self, cls):
+        try:
+            type(eval(cls))
+            return True
+        except Exception as ex:
+            print('** class doesn\'t exists**')
+            return False
+
     # object manipulation
     def do_create(self, command):
         """Creates an instance of the desired class
@@ -19,13 +28,12 @@ class HBTNCommand(cmd.Cmd):
         if len(command) < 1:
             print('** class name missing **')
             return
-        try:
-            line = command.split()
+        line = command.split()
+
+        if self.check_class(line[0]):
             new_obj = eval(f'{line[0]}()')
             new_obj.save()
             print(new_obj.id)
-        except Exception as ex:
-            print('** class doesn\'t exists **')
 
     def do_show(self, command):
         """Prints string representation of an instance of a class based on id
@@ -36,20 +44,15 @@ class HBTNCommand(cmd.Cmd):
             return
 
         line = command.split()
-        try:
-            type(eval(line[0]))
-        except Exception as ex:
-            print('** class doesn\'t exist **')
-            return
-
-        if len(line) < 2:
-            print('** instance id missing **')
-            return
-
-        try:
-            print(storage.all()[f'{line[0]}.{line[1]}'])
-        except Exception as ex:
-            print('** no instance found **')
+        
+        if self.check_class(line[0]):
+            if len(line) < 2:
+                print('** instance id missing **')
+                return
+            try:
+                print(storage.all()[f'{line[0]}.{line[1]}'])
+            except Exception as ex:
+                print('** no instance found **')
 
     def do_destroy(self, command):
         """Deletes an instance of a class based on its id
