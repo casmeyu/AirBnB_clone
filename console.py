@@ -4,17 +4,27 @@
     It uses the CMD python module
 """
 import cmd
+from models.base_model import BaseModel
 
 
 class HBTNCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
     # object manipulation
-    def do_create(self, line):
+    def do_create(self, command):
         """Creates an instance of the desired class
         Usage: create <class_name>
         """
-        print(f"creating {line}")
+        if len(command) < 1:
+            print('** class name missing **')
+            return
+        try:
+            line = command.split()
+            new_obj = eval(f'{line[0]}()')
+            new_obj.save()
+            print(new_obj.id)
+        except Exception as ex:
+            print('** class doesn\'t exists **')
 
     def do_show(self, line):
         """Prints string representation of an instance of a class based on id
