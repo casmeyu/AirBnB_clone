@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 class FileStorage():
     """class filestorage"""
-    __file_path = "data_base.json"
+    __file_path = "file.json"
     __objects = {}
 
     def all(self):
@@ -19,18 +19,20 @@ class FileStorage():
 
     def save(self):
         """public method save"""
-        with open(self.__file_path, "a+") as fi:
+        aux_dict = {}
+        with open(self.__file_path, "w+") as fi:
             for key, value in self.__objects.items():
-                var = json.dumps({key: value.to_dict()})
-                fi.write(f'{var},\n')
+                aux_dict[key] = value.to_dict()
+
+            aux_str = json.dumps(aux_dict)
+            fi.write(aux_str)
 
     def reload(self):
         """public method reload""" 
         try:
-            with open(self.__file_path, 'a') as fi:
-                x = json.loads(fi.read())
+            with open(self.__file_path, 'r') as fi:
+                x = json.load(fi)
                 for key, value in x.items():
-                    value = BaseMode(value)
-                    self.__objects[key] = value
+                    self.__objects[key] = BaseModel(**value)
         except Exception as ex:
-                    pass
+            pass

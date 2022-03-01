@@ -13,9 +13,9 @@ class BaseModel():
             for key, value in kwargs.items():
                 if key != '__class__':
                     if key == 'created_at' or key == 'updated_at':
-                        self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                        setattr(self, key, datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
                     else:
-                        self.key = value
+                        setattr(self, key, value)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
@@ -28,9 +28,9 @@ class BaseModel():
     def save(self):
         """ Saves a JSON representation of the object
             using the file_storage engine
-        """
-        models.storage.save()
+        """ 
         self.updated_at = datetime.now()
+        models.storage.save()
 
 
     def to_dict(self):
