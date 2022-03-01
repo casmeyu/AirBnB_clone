@@ -5,6 +5,7 @@
 """
 import cmd
 from models.base_model import BaseModel
+from models import storage
 
 
 class HBTNCommand(cmd.Cmd):
@@ -26,11 +27,29 @@ class HBTNCommand(cmd.Cmd):
         except Exception as ex:
             print('** class doesn\'t exists **')
 
-    def do_show(self, line):
+    def do_show(self, command):
         """Prints string representation of an instance of a class based on id
-Usage: show <class_name> <id>
+        Usage: show <class_name> <id>
         """
-        print(f"show {line}")
+        if len(command) < 1:
+            print('** class name missing **')
+            return
+
+        line = command.split()
+        try:
+            type(eval(line[0]))
+        except Exception as ex:
+            print('** class doesn\'t exist **')
+            return
+
+        if len(line) < 2:
+            print('** instance id missing **')
+            return
+
+        try:
+            print(storage.all()[f'{line[0]}.{line[1]}'])
+        except Exception as ex:
+            print('** no instance found **')
 
     def do_destroy(self, line):
         """Deletes an instance of a class based on its id
