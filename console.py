@@ -51,24 +51,30 @@ class HBTNCommand(cmd.Cmd):
         except Exception as ex:
             print('** no instance found **')
 
-    def do_destroy(self, line):
+    def do_destroy(self, command):
         """Deletes an instance of a class based on its id
 and updates the data base
 Usage: destroy <class_name> <id>
         """
         print(f'destroying {line}')
 
-    def do_all(self, line):
+    def do_all(self, command):
         """Prints the string representation of all the instances of a class
 if no class is given it prints all the instances
 Usage: all ?<class_name>?
         """
-        if not line:
-            print("show all")
+        objects = storage.all()
+        if len(command) < 1:
+            for key in objects:
+                print(objects[key])
         else:
-            print(f"all {line}")
+            line = command.split()
+            for key in objects:
+                aux_key = key.split('.')[0]
+                if line[0] == aux_key:
+                    print(objects[key])
 
-    def do_update(self, line):
+    def do_update(self, command):
         """Updates instance of a class based on id adding/updating attributes
 only one attribute can be updated at a time
 Usage: update <class_name> <id> <attribute name> "<attribute value>"
