@@ -28,7 +28,7 @@ class FileStorage():
             fi.write(aux_str)
 
     def reload(self):
-        """public method reload""" 
+        """public method reload"""
         try:
             with open(self.__file_path, 'r') as fi:
                 x = json.load(fi)
