@@ -35,7 +35,7 @@ class BaseModel():
 
     def to_dict(self):
         """ Returns a dictionary representation of the object """
-        dict_new = {"__class__": self.__class__.__name__}
+        dict_new = {"__class__": type(self).__name__}
         for key in self.__dict__:
             if key == "created_at" or key == "updated_at":
                 dict_new[key] = self.__dict__[key].isoformat()
