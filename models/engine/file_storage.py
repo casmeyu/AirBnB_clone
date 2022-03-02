@@ -24,8 +24,7 @@ class FileStorage():
             for key, value in self.__objects.items():
                 aux_dict[key] = value.to_dict()
 
-            aux_str = json.dumps(aux_dict)
-            fi.write(aux_str)
+            fi.write(json.dumps(aux_dict))
 
     def reload(self):
         """public method reload"""

@@ -4,7 +4,9 @@
     It uses the CMD python module
 """
 import cmd
+from datetime import datetime
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
@@ -13,6 +15,7 @@ class HBTNCommand(cmd.Cmd):
 
     # validation functions
     def check_class(self, cls):
+        print(cls)
         try:
             type(eval(cls))
             return True
@@ -82,21 +85,55 @@ if no class is given it prints all the instances
 Usage: all ?<class_name>?
         """
         objects = storage.all()
+        list_repr = []
         if len(command) < 1:
             for key in objects:
-                print(objects[key])
+                list_repr.append(str(objects[key]))
         else:
             line = command.split()
             for key in objects:
                 aux_key = key.split('.')[0]
                 if line[0] == aux_key:
-                    print(objects[key])
+                    list_repr.append(str(objects[key]))
+
+        print(list_repr)
 
     def do_update(self, command):
         """Updates instance of a class based on id adding/updating attributes
 only one attribute can be updated at a time
 Usage: update <class_name> <id> <attribute name> "<attribute value>"
         """
+        if len(command) < 1:
+            print('** class name missing **')
+            return
+
+        line = command.split()
+        
+        if self.check_class(line[0]):
+            if len(line) < 2:
+                print('** instance id missing **')
+            elif len(line) < 3:
+                print('** attribute name missing **')
+            elif len(line) < 4:
+                print('** value missing **')
+            else:
+                try:
+                    key = f'{line[0]}.{line[1]}'
+                    obj = storage.all()
+                    obj = obj[key]
+                    
+                    if line[2] == 'created_at' and line[2] == 'updated_at':
+                        return
+                    if line[2] == 'id':
+                        return
+                    att = line[3].strip('\"')
+                    print(f"stripped: {att}")
+                    setattr(obj, 'updated_at', datetime.now())
+                    setattr(obj, line[2], line[3].strip('\"'))
+                except Exception as ex:
+                    print('** no instance found **')
+                    print(ex)
+
         print(f"update {line}")
 
     def do_quit(self, command):
