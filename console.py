@@ -7,6 +7,10 @@ import cmd
 from datetime import datetime
 from models.base_model import BaseModel
 from models.user import User
+from models.city import City
+from models.state import State
+from models.place import Place
+from models.amenity import Amenity
 from models import storage
 
 
@@ -135,6 +139,33 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
                     print(ex)
 
         print(f"update {line}")
+
+    # Specific object Manipulation
+    def default(self, command):
+        print("entered default")
+        #methods = {
+        #        {'all': self.do_all},
+        #        {'show': self.do_show},
+        #        {'destroy': self.do_destroy},
+        #        {'update': self.do_update}
+                # {'count': self.do_count}
+        #        }
+        if len(command) < 1:
+            return
+        line = command.split('.')
+
+        print('going to check')
+        if self.check_class(line[0]):
+            if len(line) > 1:
+                print(line[0])
+
+                fun = line[1].split('(')
+                print(f'fun: {fun}')
+                if fun[0] in methods.keys():
+                    print(f'encontre: {fun[0]}')
+                    fun[1].strip(')')
+                    print(f'fun[1]: {fun[1]}')
+                    methods[fun[0]](fun[1])
 
     def do_quit(self, command):
         """Quit command to exit the program

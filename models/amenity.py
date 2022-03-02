@@ -5,4 +5,7 @@ from models.base_model import BaseModel
 
 class Amenity(BaseModel):
     """Amenity model for the AirBnB app"""
-    name = ""
+    def __init__(self):
+        """Initialization of the amenity model"""
+        super().__init__()
+        name = ""

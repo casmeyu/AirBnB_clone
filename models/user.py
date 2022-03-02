@@ -4,7 +4,10 @@ from models.base_model import BaseModel
 
 class User(BaseModel):
     """User model for the AirBnB application"""
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
+    def __init__(self, *args, **kwargs):
+        """Initialization for the user model"""
+        super().__init__()
+        self.email = ""
+        self.password = ""
+        self.first_name = ""
+        self.last_name = ""

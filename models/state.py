@@ -5,4 +5,7 @@ from models.base_model import BaseModel
 
 class State(BaseModel):
     """State model for AirBnB app"""
-    name = ""
+    def __init__(self):
+        """Initialization of state model"""
+        super().__init__()
+        self.name = ""

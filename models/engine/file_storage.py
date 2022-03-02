@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """Module for class File storage"""
 import json
+from models.amenity import Amenity
 from models.base_model import BaseModel
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class FileStorage():
@@ -32,6 +38,7 @@ class FileStorage():
             with open(self.__file_path, 'r') as fi:
                 x = json.load(fi)
                 for key, value in x.items():
-                    self.__objects[key] = BaseModel(**value)
+                    cls = value['__class__']
+                    self.__objects[key] = eval(f'{cls}(**{value})')
         except Exception as ex:
             pass

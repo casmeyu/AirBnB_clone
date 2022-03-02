@@ -5,5 +5,8 @@ from models.base_model import BaseModel
 
 class City(BaseModel):
     """City Model for AirBnB"""
-    state_id = ""
-    name = ""
+    def __init__(self):
+        """Initialization ofcity model"""
+        super().__init__()
+        self.state_id = ""
+        self.name = ""
