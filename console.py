@@ -172,8 +172,11 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
 
                 fun = line[1].split('(')
                 if fun[0] in self.methods().keys():
-                    fun[1] = fun[1].strip(')')
-                    self.methods()[fun[0]](f"{line[0]} {fun[1]}")
+                    if len(fun) > 1:
+                        fun[1] = fun[1].strip(')')
+                        self.methods()[fun[0]](f"{line[0]} {fun[1]}")
+                    else:
+                        return
 
     def do_quit(self, command):
         """Quit command to exit the program
