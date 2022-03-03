@@ -14,6 +14,18 @@ class FileStorage():
     """class filestorage"""
     __file_path = "file.json"
     __objects = {}
+    __classes = {
+            'BaseModel': BaseModel,
+            'User': User,
+            'State': State,
+            'City': City,
+            'Place': Place,
+            'Amenity': Amenity,
+            'Review': Review
+            }
+    @property
+    def classes(self):
+        return self.__classes
 
     def all(self):
         """public method all"""
@@ -39,6 +51,7 @@ class FileStorage():
                 x = json.load(fi)
                 for key, value in x.items():
                     cls = value['__class__']
-                    self.__objects[key] = eval(f'{cls}(**{value})')
+                    if cls in self.classes.keys():
+                       self.__objects[key] = self.__classes[cls](**value)
         except Exception as ex:
             pass

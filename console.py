@@ -19,10 +19,9 @@ class HBTNCommand(cmd.Cmd):
 
     # validation functions
     def check_class(self, cls):
-        print(cls)
         try:
-            type(eval(cls))
-            return True
+            if cls in storage.classes:
+                return True
         except Exception as ex:
             print('** class doesn\'t exists**')
             return False
@@ -123,22 +122,36 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
             else:
                 try:
                     key = f'{line[0]}.{line[1]}'
+                    print(storage.all())
                     obj = storage.all()
+                    print(obj)
                     obj = obj[key]
                     
                     if line[2] == 'created_at' and line[2] == 'updated_at':
                         return
                     if line[2] == 'id':
                         return
-                    att = line[3].strip('\"')
-                    print(f"stripped: {att}")
+
+                    att = line[3]
+                    if att[0] != '\"' and (att[0].isdigit() or att[0] == '.'):
+                        float_flag = False
+                        for char in att:
+                            if char.isdigit() or char == '.':
+                                if char == '.':
+                                    float_flag = True
+                            else:
+                                break
+
+                        if float_flag:
+                            att = float(att)
+                        else:
+                            att = int(att)
+                    else:
+                        att = att.strip('\"')
                     setattr(obj, 'updated_at', datetime.now())
-                    setattr(obj, line[2], line[3].strip('\"'))
+                    setattr(obj, line[2], att)
                 except Exception as ex:
                     print('** no instance found **')
-                    print(ex)
-
-        print(f"update {line}")
 
     # Specific object Manipulation
     def default(self, command):

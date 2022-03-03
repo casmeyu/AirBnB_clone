@@ -5,9 +5,8 @@ from models.base_model import BaseModel
 
 class Place(BaseModel):
     """Place Model for AirBnB"""
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Initialization of the place model"""
-        super().__init__()
         self.city_id = ""
         self.user_id = ""
         self.name = ""
@@ -19,3 +18,4 @@ class Place(BaseModel):
         self.latitude = 0.0
         self.longitude = 0.0
         self.amenity_ids = []
+        super().__init__(*args, **kwargs)
