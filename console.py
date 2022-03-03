@@ -18,14 +18,11 @@ class HBTNCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
     def methods(self):
-        print("entre a methods")
         methods = {}
         methods['all'] = self.do_all
         methods['show'] =  self.do_show
-        #        {'destroy': self.do_destroy},
-        #        {'update': self.do_update}
-        #        }
-        print(methods)
+        methods['destroy'] = self.do_destroy
+        methods['update'] = self.do_update
         return(methods)
 
     # validation functions
@@ -166,24 +163,17 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
 
     # Specific object Manipulation
     def default(self, command):
-        print("entered default")
-        print(self.methods())
         if len(command) < 1:
             return
         line = command.split('.')
 
-        print('going to check')
         if self.check_class(line[0]):
             if len(line) > 1:
-                print(line[0])
 
                 fun = line[1].split('(')
-                print(f'fun: {fun}')
-                if fun[0] in methods.keys():
-                    print(f'encontre: {fun[0]}')
-                    fun[1].strip(')')
-                    print(f'fun[1]: {fun[1]}')
-                    methods[fun[0]](fun[1])
+                if fun[0] in self.methods().keys():
+                    fun[1] = fun[1].strip(')')
+                    self.methods()[fun[0]](f"{line[0]} {fun[1]}")
 
     def do_quit(self, command):
         """Quit command to exit the program
