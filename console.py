@@ -17,6 +17,17 @@ from models import storage
 class HBTNCommand(cmd.Cmd):
     prompt = '(hbtn) '
 
+    def methods(self):
+        print("entre a methods")
+        methods = {}
+        methods['all'] = self.do_all
+        methods['show'] =  self.do_show
+        #        {'destroy': self.do_destroy},
+        #        {'update': self.do_update}
+        #        }
+        print(methods)
+        return(methods)
+
     # validation functions
     def check_class(self, cls):
         try:
@@ -156,13 +167,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
     # Specific object Manipulation
     def default(self, command):
         print("entered default")
-        #methods = {
-        #        {'all': self.do_all},
-        #        {'show': self.do_show},
-        #        {'destroy': self.do_destroy},
-        #        {'update': self.do_update}
-                # {'count': self.do_count}
-        #        }
+        print(self.methods())
         if len(command) < 1:
             return
         line = command.split('.')
