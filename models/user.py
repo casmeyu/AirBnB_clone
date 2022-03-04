@@ -2,6 +2,7 @@
 """Module for Use Model"""
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """User model for the AirBnB application"""
     def __init__(self, *args, **kwargs):

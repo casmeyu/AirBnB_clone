@@ -15,18 +15,21 @@ from models import storage
 
 
 class HBTNCommand(cmd.Cmd):
+    """Command line class"""
     prompt = '(hbtn) '
 
     def methods(self):
+        """Dictionary of methods for command line"""
         methods = {}
         methods['all'] = self.do_all
-        methods['show'] =  self.do_show
+        methods['show'] = self.do_show
         methods['destroy'] = self.do_destroy
         methods['update'] = self.do_update
         return(methods)
 
     # validation functions
     def check_class(self, cls):
+        """Check for the diffrent classes"""
         try:
             if cls in storage.classes:
                 return True
@@ -119,7 +122,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
             return
 
         line = command.split()
-        
+
         if self.check_class(line[0]):
             if len(line) < 2:
                 print('** instance id missing **')
@@ -134,7 +137,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
                     obj = storage.all()
                     print(obj)
                     obj = obj[key]
-                    
+
                     if line[2] == 'created_at' and line[2] == 'updated_at':
                         return
                     if line[2] == 'id':
@@ -163,6 +166,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
 
     # Specific object Manipulation
     def default(self, command):
+        """Check any input for valid command"""
         if len(command) < 1:
             return
         line = command.split('.')

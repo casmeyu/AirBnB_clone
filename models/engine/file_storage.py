@@ -23,8 +23,10 @@ class FileStorage():
             'Amenity': Amenity,
             'Review': Review
             }
+
     @property
     def classes(self):
+        """Property of classes"""
         return self.__classes
 
     def all(self):
@@ -52,6 +54,6 @@ class FileStorage():
                 for key, value in x.items():
                     cls = value['__class__']
                     if cls in self.classes.keys():
-                       self.__objects[key] = self.__classes[cls](**value)
+                        self.__objects[key] = self.__classes[cls](**value)
         except Exception as ex:
             pass
