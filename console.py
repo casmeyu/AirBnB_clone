@@ -3,15 +3,15 @@
     This module is the entry point for the logic of the application
     It uses the CMD python module
 """
+from models.amenity import Amenity
+from models.base_model import BaseModel
+from models.city import City
 import cmd
 from datetime import datetime
-from models.base_model import BaseModel
-from models.user import User
-from models.city import City
-from models.state import State
 from models.place import Place
-from models.amenity import Amenity
+from models.state import State
 from models import storage
+from models.user import User
 
 
 class HBTNCommand(cmd.Cmd):
