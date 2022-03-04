@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Module for Base Model """
-from datetime import datetime
 import models
+from datetime import datetime
 from uuid import uuid4
 
 
