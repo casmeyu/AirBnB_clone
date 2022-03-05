@@ -192,6 +192,7 @@ Usage: quit
         """End of File exits the program
 Usage: EOF
         """
+        print()
         return True
 
     def emptyline(self):
