@@ -20,6 +20,11 @@ class BaseModelTest(unittest.TestCase):
         self.assertEqual(type(new_bm.created_at), datetime)
         self.assertEqual(type(new_bm.updated_at), datetime)
 
+        u_date = new_bm.updated_at.isoformat()
+        c_date = new_bm.created_at.isoformat()
+        self.assertEqual(new_bm.to_dict()['updated_at'], u_date)
+        self.assertEqual(new_bm.to_dict()['created_at'], c_date)
+
         new_bm = BaseModel(**{'name': "Cami"})
         self.assertEqual(new_bm.name, "Cami")
 
