@@ -135,46 +135,53 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
 
         line = command.split()
 
-        if self.check_class(line[0]):
-            if len(line) < 2:
-                print('** instance id missing **')
-            elif len(line) < 3:
-                print('** attribute name missing **')
-            elif len(line) < 4:
-                print('** value missing **')
+        if not self.check_class(line[0]):
+            return
+
+        if len(line) < 2:
+            print("** instance id missing **")
+            return
+
+        key = f'{line[0]}.{line[1]}'
+        if key not in storage.all().keys():
+            print("** not instance found **")
+            return
+
+        if len(line) < 3:
+            print('** attribute name missing **')
+            return
+
+        if len(line) < 4:
+            print('** value missing **')
+            return
+
+        if line[2] == 'created_at' and line[2] == 'updated_at':
+            return
+        if line[2] == 'id':
+            return
+
+        value = line[3]
+        if value[0] != '\"' and (value[0].isdigit() or value[0] == '.'):
+            float_flag = False
+            for char in value:
+                if char.isdigit() or char == '.':
+                    if char == '.':
+                        float_flag = True
+                else:
+                    break
+
+            if float_flag:
+                value = float(value)
             else:
-                try:
-                    key = f'{line[0]}.{line[1]}'
-                    print(storage.all())
-                    obj = storage.all()
-                    print(obj)
-                    obj = obj[key]
+                value = int(value)
+        else:
+            value = value.strip('\"')
 
-                    if line[2] == 'created_at' and line[2] == 'updated_at':
-                        return
-                    if line[2] == 'id':
-                        return
+        obj = storage.all()[key]
+        setattr(obj, 'updated_at', datetime.now())
+        setattr(obj, line[2], value)
 
-                    att = line[3]
-                    if att[0] != '\"' and (att[0].isdigit() or att[0] == '.'):
-                        float_flag = False
-                        for char in att:
-                            if char.isdigit() or char == '.':
-                                if char == '.':
-                                    float_flag = True
-                            else:
-                                break
-
-                        if float_flag:
-                            att = float(att)
-                        else:
-                            att = int(att)
-                    else:
-                        att = att.strip('\"')
-                    setattr(obj, 'updated_at', datetime.now())
-                    setattr(obj, line[2], att)
-                except Exception as ex:
-                    print('** no instance found **')
+        storage.save()
 
     # Specific object Manipulation
     def default(self, command):
