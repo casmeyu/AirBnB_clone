@@ -30,7 +30,9 @@ class BaseModelTest(unittest.TestCase):
         """Test the methods of BaseModel"""
         new_bm = BaseModel()
         self.assertEqual(type(new_bm.to_dict()), dict)
+
         self.assertEqual(type(new_bm.__str__()), str)
+        self.assertNotEqual(len(new_bm.__str__()), 0)
 
         last_update = new_bm.updated_at
         new_bm.save()
@@ -38,3 +40,5 @@ class BaseModelTest(unittest.TestCase):
         self.assertEqual(new_bm, storage.all()[key])
         self.assertNotEqual(new_bm.updated_at, last_update)
 
+if __name__ == '__main__':
+    unittest.main()
