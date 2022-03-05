@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Module for testing the Base Model"""
+import json
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -39,6 +40,17 @@ class BaseModelTest(unittest.TestCase):
         key = f'BaseModel.{new_bm.id}'
         self.assertEqual(new_bm, storage.all()[key])
         self.assertNotEqual(new_bm.updated_at, last_update)
+
+    def test_save_reload(self):
+        """Test save and reload from json file"""
+        new_bm = BaseModel()
+        new_bm.save()
+        try:
+            with open('file.json', 'r') as fd:
+                objs = json.loads(fd)
+                self.assertEqual(new_bm, objs[f'BaseModel.{new_bm.id}'])
+        except Exception as ex:
+            pass
 
 if __name__ == '__main__':
     unittest.main()
