@@ -14,6 +14,8 @@ class BaseModelTest(unittest.TestCase):
         new_bm = BaseModel()
         self.assertEqual(type(new_bm), BaseModel)
         self.assertEqual(type(new_bm.id), str)
+        self.assertEqual(str(new_bm), f'[BaseModel] ({new_bm.id}) \
+{new_bm.__dict__}')
         self.assertEqual(type(new_bm.created_at), datetime)
         self.assertEqual(type(new_bm.updated_at), datetime)
 
