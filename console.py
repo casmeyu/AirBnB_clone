@@ -31,7 +31,7 @@ class HBTNCommand(cmd.Cmd):
     def check_class(self, cls):
         """Check for the diffrent classes"""
         try:
-            if cls in storage.classes:
+            if cls in self.methods:
                 return True
         except Exception as ex:
             print('** class doesn\'t exists**')
