@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module for testing the Base Model"""
 import json
+import os
 import unittest
 from datetime import datetime
 from models.base_model import BaseModel
@@ -39,6 +40,7 @@ class BaseModelTest(unittest.TestCase):
 
         last_update = new_bm.updated_at
         new_bm.save()
+        self.assertTrue(os.path.isfile('file.json'))
         key = f'BaseModel.{new_bm.id}'
         self.assertEqual(new_bm, storage.all()[key])
         self.assertNotEqual(new_bm.updated_at, last_update)
