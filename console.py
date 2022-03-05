@@ -16,7 +16,7 @@ from models.user import User
 
 class HBTNCommand(cmd.Cmd):
     """Command line class"""
-    prompt = '(hbtn) '
+    prompt = '(hbnb) '
 
     def methods(self):
         """Dictionary of methods for command line"""
@@ -197,7 +197,7 @@ Usage: EOF
 
     def emptyline(self):
         """Prints a new line"""
-        pass
+        return
 
 
 if __name__ == '__main__':
