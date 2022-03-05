@@ -26,6 +26,7 @@ class HBTNCommand(cmd.Cmd):
         methods['show'] = self.do_show
         methods['destroy'] = self.do_destroy
         methods['update'] = self.do_update
+        methods['count'] = self.count
         return(methods)
 
     def classes(self):
@@ -204,6 +205,19 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
                         self.methods()[fun[0]](f"{line[0]} {fun[1]}")
                     else:
                         return
+
+    def count(self, command):
+        """Count command to retrieve the number of instances"""
+
+        line = command.split(' ')
+
+        count = 0
+
+        for key in storage.all():
+            key = key.split('.')
+            if key[0] == line[0]:
+                count += 1
+        print(count)
 
     def do_quit(self, command):
         """Quit command to exit the program
