@@ -46,7 +46,7 @@ class HBTNCommand(cmd.Cmd):
         if cls in self.classes():
             return True
         else:
-            print('** class doesn\'t exists**')
+            print('** class doesn\'t exist **')
             return False
 
     # object manipulation
@@ -117,10 +117,14 @@ Usage: all ?<class_name>?
                 list_repr.append(str(objects[key]))
         else:
             line = command.split()
-            for key in objects:
-                aux_key = key.split('.')[0]
-                if line[0] == aux_key:
-                    list_repr.append(str(objects[key]))
+            if line[0] in self.classes().keys():
+                for key in objects:
+                    aux_key = key.split('.')[0]
+                    if line[0] == aux_key:
+                        list_repr.append(str(objects[key]))
+            else:
+                print("** class doesn't exist **")
+                return
 
         print(list_repr)
 
