@@ -52,5 +52,6 @@ class BaseModelTest(unittest.TestCase):
         except Exception as ex:
             pass
 
+
 if __name__ == '__main__':
     unittest.main()
