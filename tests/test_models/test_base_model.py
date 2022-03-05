@@ -44,6 +44,7 @@ class BaseModelTest(unittest.TestCase):
         key = f'BaseModel.{new_bm.id}'
         self.assertEqual(new_bm, storage.all()[key])
         self.assertNotEqual(new_bm.updated_at, last_update)
+        self.assertNotEqual(new_bm.created_at, new_bm.updated_at)
 
     def test_save_reload(self):
         """Test save and reload from json file"""
