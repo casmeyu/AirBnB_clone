@@ -3,12 +3,13 @@
     This module is the entry point for the logic of the application
     It uses the CMD python module
 """
+import cmd
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
-import cmd
 from datetime import datetime
 from models.place import Place
+from models.review import Review
 from models.state import State
 from models import storage
 from models.user import User
@@ -27,13 +28,24 @@ class HBTNCommand(cmd.Cmd):
         methods['update'] = self.do_update
         return(methods)
 
+    def classes(self):
+        """Dictionary of valid classes"""
+        classes = {}
+        classes['BaseModel'] = BaseModel
+        classes['User'] = User
+        classes['City'] = City
+        classes['Amenity'] = Amenity
+        classes['Place'] = Place
+        classes['State'] = State
+        classes['Review'] = Review
+        return(classes)
+
     # validation functions
     def check_class(self, cls):
         """Check for the diffrent classes"""
-        try:
-            if cls in self.methods:
-                return True
-        except Exception as ex:
+        if cls in self.classes():
+            return True
+        else:
             print('** class doesn\'t exists**')
             return False
 
