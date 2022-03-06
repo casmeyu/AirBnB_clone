@@ -1,14 +1,14 @@
-## AirBnB Clone for Holberton School
+# AirBnB Clone for Holberton School
 This is a brief description of what this console is about
 
-## Models
+# Models
 Here we can find a brief description about the models and their attributes
 (list)
-###### **BaseModel**
-###### **User**
-###### **Place**
-###### **City**
-###### **State**
+## **BaseModel**
+## **User**
+### **Place**
+#### **City**
+##### **State**
 ###### **Amenity**
 ###### **Review**
 
