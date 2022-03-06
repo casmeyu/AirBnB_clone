@@ -5,10 +5,15 @@ This is a brief description of what this console is about
 - ### **BaseModel**
     This is the base model from where every other object inherits
     
-    Attributes:
-        - **id(uuid4)**
-        - **created_at(datetime)**
-        - **updated_at(datetime)**
+    ##### Attributes
+    - id(uuid4)
+    - created_at(datetime)
+    - updated_at(datetime)
+    ##### Methods
+    - save()
+        Stores the object instance into the data base
+    - to_dict()
+        Returns the dictionary representation of the object
 - ### **User**
 - ### **Place**
 - ### **City**
@@ -18,29 +23,56 @@ This is a brief description of what this console is about
 
 ## Usage
 Here we can find all the commands available on the console and how to use them
-(list)
-- ### **all \?\<class\>\?**
-#### **\<class\> is an optional parameter**
+- ### **create <class>**
+    Creates an instance of a class with the basic attributes, saves it into the data base
+    and prints it's id
 
-Returns a list with all objects in the system if not class is specified
-Otherwhise it returns only the instance of said class
-
+##### Examples:
 ```
 create BaseModel
 4b4f1249-ff39-443e-af90-9199f7609a34
+create User
+0d7fe5d8-2134-40e3-ada5-f6865b532a8d
 ```
 
-Errors:
-  - If no class is specified
+##### Errors:
+- **No class is specified**
 ```
   create
-  \*\* class name missing \*\*
+  ** class name missing **
 ```
+
+- ### **all \?\<class\>\?**
+    ##### \<class\> is an optional parameter
+
+    Returns a list with all objects in the system if no class is specified
+    Otherwhise, if the class exists, returns a list only with the instances of said class
+##### Examples:
+```
+all
+["[BaseModel] (4b4f1249-ff39-443e-af90-9199f7609a34) {'id': '4b4f1249-ff39-443e-af90-9199f7609a34', 'created_at': datetime.datetime(2022, 3, 6, 13, 16, 39, 570451), 'updated_at': datetime.datetime(2022, 3, 6, 13, 16, 39, 570466)}", "[User] (0d7fe5d8-2134-40e3-ada5-f6865b532a8d) {'id': '0d7fe5d8-2134-40e3-ada5-f6865b532a8d', 'created_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577397), 'updated_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577410)}"]
+```
+```
+all User
+["[User] (0d7fe5d8-2134-40e3-ada5-f6865b532a8d) {'id': '0d7fe5d8-2134-40e3-ada5-f6865b532a8d', 'created_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577397), 'updated_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577410)}"]
+```
+
+##### Errors:
+```
+all NotAClass
+** class doen's exist **
+```
+
 - ### **show <class> \"\<id\>\"**
 Prints the string representation of an instance of a given class
-ex:
+It checks if it's a valid class and then if the instance exists
 
-Errors:
+##### Examples:
+```
+show User 0d7fe5d8-2134-40e3-ada5-f6865b532a8d
+["[User] (0d7fe5d8-2134-40e3-ada5-f6865b532a8d) {'id': '0d7fe5d8-2134-40e3-ada5-f6865b532a8d', 'created_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577397), 'updated_at': datetime.datetime(2022, 3, 6, 13, 39, 39, 577410)}"]
+```
+##### Errors:
 
 
 - ### **destroy <class> \"\<id\>\"**
@@ -48,7 +80,7 @@ Deletes an instance of a given class
 
 ex:
 
-Errors:
+##### Errors:
 
 
 - ### **update \<class\> \"\<id\>\" \"\<attribue_name\>\" <value\>**
