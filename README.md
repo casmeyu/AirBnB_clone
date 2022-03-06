@@ -2,9 +2,13 @@
 This is a brief description of what this console is about
 
 # Models
-Here we can find a brief description about the models and their attributes
-(list)
 - ### **BaseModel**
+    This is the base model from where every other object inherits
+    
+    Attributes:
+        - **id(uuid4)**
+        - **created_at(datetime)**
+        - **updated_at(datetime)**
 - ### **User**
 - ### **Place**
 - ### **City**
@@ -21,14 +25,17 @@ Here we can find all the commands available on the console and how to use them
 Returns a list with all objects in the system if not class is specified
 Otherwhise it returns only the instance of said class
 
-
 ```
 create BaseModel
 4b4f1249-ff39-443e-af90-9199f7609a34
 ```
+
 Errors:
-
-
+  - If no class is specified
+```
+  create
+  \*\* class name missing \*\*
+```
 - ### **show <class> \"\<id\>\"**
 Prints the string representation of an instance of a given class
 ex:
