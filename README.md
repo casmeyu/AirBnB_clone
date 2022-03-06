@@ -20,11 +20,12 @@ Here we can find all the commands available on the console and how to use them
 
 Returns a list with all objects in the system if not class is specified
 Otherwhise it returns only the instance of said class
-ex:
-`
+
+
+```
 create BaseModel
 4b4f1249-ff39-443e-af90-9199f7609a34
-`
+```
 Errors:
 
 
