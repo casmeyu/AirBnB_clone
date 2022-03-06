@@ -51,3 +51,7 @@ class TestFileStorage(unittest.TestCase):
         # self.assertNotEqual(len(aux_dict), len(aux_dict2))
         # self.assertEqual(new_fs.new(new_bm2), None)
         # self.assertNotEqual(len(aux_dict.keys()), len(new_fs.all().keys()))
+
+
+    if __name__ == '__main__':
+        unittest.main()
