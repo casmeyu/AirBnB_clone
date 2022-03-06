@@ -15,17 +15,17 @@ Here we can find a brief description about the models and their attributes
 ## Usage
 Here we can find all the commands available on the console and how to use them
 (list)
-###### **all ?<class>?**
-###### **show <class> "<id>"**
-###### **destroy <class> "<id>"**
-###### **update <class> "<id>" "<attribue_name>" <value>**
+###### **all \?<class>\?**
+###### **show <class> \"\<id\>\"**
+###### **destroy <class> \"\<id\>\"**
+###### **update <class> \"<id>\" \"\<attribue_name\>\" <\value\>**
 
 
 Mention that we can also use it by classname
 ###### **User.all()**
-###### **User.show("<id>")**
-###### **user.destroy("<id>")**
-###### **User.update("<id>", "<attribute>" <value>**
+###### **User.show(\"\<id\>\")**
+###### **user.destroy(\"\<id\>\")**
+###### **User.update(\"\<id\>\", \"\<attribute\>\" \<value\>)**
 
 Installation
 Clone this repo and execute the **./console.py** file
