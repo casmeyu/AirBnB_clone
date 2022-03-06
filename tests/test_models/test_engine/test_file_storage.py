@@ -42,6 +42,7 @@ class TestFileStorage(unittest.TestCase):
         new_bm = BaseModel()
         self.assertEqual(type(new_fs.all()), dict)
         self.assertNotEqual(len(new_fs.all()), 0)
+        self.assertEqual(new_fs.new(new_bm), None)
         self.assertEqual(new_fs.save(), None)
         self.assertEqual(new_fs.reload(), None)
 
