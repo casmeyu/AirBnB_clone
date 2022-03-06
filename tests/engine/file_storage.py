@@ -1,8 +1,10 @@
 #!/usr/bin/python3
 """Module for testing the file storage model"""
 import json
+import os
 import unittest
 from datetime import datetime
+from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
 
@@ -28,5 +30,15 @@ class TestFileStorage(unittest.TestCase):
 
     def test_methods(self):
         """Test methods of file storage model"""
-        new_fs = FileStorage(self)
-        self.assertEqual(type(new_fs.all), dict)
+        new_fs = FileStorage()
+        """
+        try:
+            os.remove('file.json')
+        except Exception as ex:
+            pass
+
+        self.assertEqual(len(new_fs.all().keys()), 0)
+        """
+        new_bm = BaseModel()
+        self.assertEqual(type(new_fs.all()), dict)
+        self.assertNotEqual(len(new_fs.all()), 0)
