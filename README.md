@@ -16,7 +16,7 @@ Here we can find a brief description about the models and their attributes
 Here we can find all the commands available on the console and how to use them
 (list)
 ### **all \?\<class\>\?**
-######**\<class\> is an optional parameter**
+###**\<class\> is an optional parameter**
 
 Returns a list with all objects in the system if not class is specified
 Otherwhise it returns only the instance of said class
