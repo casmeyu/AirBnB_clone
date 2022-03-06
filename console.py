@@ -74,12 +74,12 @@ Usage: show <class_name> <id>
             return
 
         line = command.split()
-
         if self.check_class(line[0]):
             if len(line) < 2:
                 print('** instance id missing **')
                 return
             try:
+                line[1] = line[1].strip('\"')
                 print(storage.all()[f'{line[0]}.{line[1]}'])
             except Exception as ex:
                 print('** no instance found **')
@@ -147,6 +147,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
             print("** instance id missing **")
             return
 
+        line[1] = line[1].strip('\"')
         key = f'{line[0]}.{line[1]}'
         if key not in storage.all().keys():
             print("** not instance found **")
@@ -194,7 +195,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         if len(command) < 1:
             return
         line = command.split('.')
-
+        
         if self.check_class(line[0]):
             if len(line) > 1:
 
