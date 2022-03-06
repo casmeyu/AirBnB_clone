@@ -146,7 +146,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         if len(line) < 2:
             print("** instance id missing **")
             return
-
+        line[1] = line[1].strip(",")
         line[1] = line[1].strip('\"')
         key = f'{line[0]}.{line[1]}'
         if key not in storage.all().keys():
@@ -160,7 +160,9 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         if len(line) < 4:
             print('** value missing **')
             return
-
+        
+        line[2] = line[2].strip(',')
+        line[2] = line[2].strip('\"') 
         if line[2] == 'created_at' and line[2] == 'updated_at':
             return
         if line[2] == 'id':
