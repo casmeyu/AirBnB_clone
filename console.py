@@ -4,6 +4,7 @@
     It uses the CMD python module
 """
 import cmd
+import json
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -164,12 +165,21 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         obj = storage.all()[key]
 
         if line[2][0] == "{":
+            str_dict = ""
+            for i in range(2, len(line)):
+                for char in line[i]:
+                    if char == "\'":
+                        str_dict += '\"'
+                    else:
+                        str_dict += char
+
+            # print(f'str_dict {str_dict}')
             try:
-                attr_dict = json.loads(line[2])
+                attr_dict = json.loads(str_dict)
                 for key, value in attr_dict.items():
                     setattr(obj, key, value)
             except Exception as ex:
-                pass
+                raise(ex)
         else:
             line[2] = line[2].strip(',')
             line[2] = line[2].strip('\"') 
