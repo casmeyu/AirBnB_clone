@@ -18,7 +18,7 @@ Here we can find all the commands available on the console and how to use them
 ### **all \?<class>\?**
 ### **show <class> \"\<id\>\"**
 ### **destroy <class> \"\<id\>\"**
-### **update \<class\> \"<id>\" \"\<attribue_name\>\" <value\>**
+### **update \<class\> \"\<id\>\" \"\<attribue_name\>\" <value\>**
 
 
 Mention that we can also use it by classname
