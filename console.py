@@ -161,33 +161,42 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
             print('** value missing **')
             return
         
-        line[2] = line[2].strip(',')
-        line[2] = line[2].strip('\"') 
-        if line[2] == 'created_at' and line[2] == 'updated_at':
-            return
-        if line[2] == 'id':
-            return
-
-        value = line[3]
-        if value[0] != '\"' and (value[0].isdigit() or value[0] == '.'):
-            float_flag = False
-            for char in value:
-                if char.isdigit() or char == '.':
-                    if char == '.':
-                        float_flag = True
-                else:
-                    break
-
-            if float_flag:
-                value = float(value)
-            else:
-                value = int(value)
-        else:
-            value = value.strip('\"')
-
         obj = storage.all()[key]
-        setattr(obj, 'updated_at', datetime.now())
-        setattr(obj, line[2], value)
+
+        if line[2][0] == "{":
+            try:
+                attr_dict = json.loads(line[2])
+                for key, value in attr_dict.items():
+                    setattr(obj, key, value)
+            except Exception as ex:
+                pass
+        else:
+            line[2] = line[2].strip(',')
+            line[2] = line[2].strip('\"') 
+            if line[2] == 'created_at' and line[2] == 'updated_at':
+                return
+            if line[2] == 'id':
+                return
+
+            value = line[3]
+            if value[0] != '\"' and (value[0].isdigit() or value[0] == '.'):
+                float_flag = False
+                for char in value:
+                    if char.isdigit() or char == '.':
+                        if char == '.':
+                            float_flag = True
+                    else:
+                        break
+
+                if float_flag:
+                    value = float(value)
+                else:
+                    value = int(value)
+            else:
+                value = value.strip('\"')
+
+            setattr(obj, 'updated_at', datetime.now())
+            setattr(obj, line[2], value)
 
         storage.save()
 
