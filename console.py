@@ -151,7 +151,7 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         line[1] = line[1].strip('\"')
         key = f'{line[0]}.{line[1]}'
         if key not in storage.all().keys():
-            print("** no instance found **")
+            # print("** no instance found **")
             return
 
         if len(line) < 3:
