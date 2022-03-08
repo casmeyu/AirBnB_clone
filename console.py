@@ -142,25 +142,25 @@ Usage: update <class_name> <id> <attribute name> "<attribute value>"
         line = command.split()
 
         if not self.check_class(line[0]):
-            return
+            return None
 
         if len(line) < 2:
             print("** instance id missing **")
-            return
+            return None
         line[1] = line[1].strip(",")
         line[1] = line[1].strip('\"')
         key = f'{line[0]}.{line[1]}'
         if key not in storage.all().keys():
-            # print("** no instance found **")
-            return
+            print("** no instance found **")
+            return None
 
         if len(line) < 3:
             print('** attribute name missing **')
-            return
+            return None
 
         if len(line) < 4:
             print('** value missing **')
-            return
+            return None
         
         obj = storage.all()[key]
 
