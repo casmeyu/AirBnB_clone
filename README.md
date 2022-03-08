@@ -18,52 +18,52 @@ This program storage the data of the differents classes (User, Place, Amenity, C
    Is the information of the client 
   
    Attributes:
-    - **email**
-    - **password**
-    - **first_name**
-    - **last_name**
+    - **email(string)**
+    - **password(string)**
+    - **first_name(string)**
+    - **last_name(string)**
 
 - ### **Place**
   The place of the lodging
   Attributes:
-   - **city_id**
-   - **user_id**
-   - **name**
-   - **description**
-   - **number_rooms**
-   - **number_bathrooms**
-   - **max_guest**
-   - **price_by_night**
-   - **latitude**
-   - **longitude**
-   - **amenity_ids**
+   - **city_id(uuid4)**
+   - **user_id(uuid4)**
+   - **name(string)**
+   - **description(string)**
+   - **number_rooms(int)**
+   - **number_bathrooms(int)**
+   - **max_guest(int)**
+   - **price_by_night(int)**
+   - **latitude(float)**
+   - **longitude(float)**
+   - **amenity_ids(list)**
 
 - ### **City**
   The City of the lodging
   
   Attributes:
-   - **city_id**
-   - **name**
+   - **city_id(uuid4)**
+   - **name(string)**
 
 - ### **State**
   The State of the lodging
 
   Attributes:
-   - **name**
+   - **name(string)**
 
 - ### **Amenity**
   The amenity of the lodging
   
   Attribute:
-   - **name**
+   - **name(string)**
 
 - ### **Review**
   Review of the lodging
 
   Attribute:
-   - **place_id**
-   - **user_id**
-   - **text**
+   - **place_id(uuid4)**
+   - **user_id(uuid4)**
+   - **text(string)**
 
 ## Usage
 Here we can find all the commands available on the console and how to use them
@@ -102,6 +102,7 @@ all User
 ```
 
 ##### Errors:
+**No class found**
 ```
 all NotAClass
 ** class doen's exist **
@@ -133,6 +134,10 @@ show Pla
  show User
 ** instance id missing **
 ```
+```
+ show User 673habs9j
+** no instance found **
+```
 
 - ### **destroy <class> \"\<id\>\"**
 Deletes an instance of a given class
@@ -150,6 +155,10 @@ destroy Use
 ```
  destroy User
 ** instance id missing **
+```
+```
+ destroy User 673habs9j
+** no instance found **
 ```
 
 - ### **update \<class\> \"\<id\>\" \"\<attribue_name\>\" <value\>**
@@ -217,7 +226,7 @@ BaseModel.show()
 Basemodel.show()
 ** class doesn't exist **
 ```
-- ### **User.destroy(\"\<id\>\")**
+- ### **Class.destroy(\"\<id\>\")**
 Deletes an instance of a given class
 
 ##### Example:
@@ -229,8 +238,12 @@ BaseModel.all()
 
 ##### Error:
 ```
- Place.destroy()
+ BaseModel.destroy()
 ** instance id missing **
+```
+```
+ BaseModel.destroy(673habs9j)
+** no instance found **
 ```
 
 - ### **User.update(\"\<id\>\", \"\<attribute\>\" \<value\>)**
@@ -238,23 +251,28 @@ BaseModel.all()
 
 ##### Example:
 ```
-User.update(eadb8f8c-a24a-47f2-968b-1a71240711c3, name, Martin)
+User.update(eadb8f8c-a24a-47f2-968b-1a71240711c3, "name", "Martin")
 User.show(eadb8f8c-a24a-47f2-968b-1a71240711c3)
 [User] (eadb8f8c-a24a-47f2-968b-1a71240711c3) {'id': 'eadb8f8c-a24a-47f2-968b-1a71240711c3', 'created_at': datetime.datetime(2022, 3, 4, 23, 2, 7, 60520), 'updated_at': datetime.datetime(2022, 3, 6, 14, 37, 25, 860372), 'email': '', 'password': '', 'first_name': '', 'last_name': '', 'name': 'Martin'}
 ```
 
 ##### Errors:
 ```
- User.update(eadb8f8c-a24a-47f2-968b-1a71240711c3, name)                               ** value missing **
- ```
- 
- ```
- User.update(eadb8f8c-a24a-47f2-968b-1a7124071)
+ User.update(eadb8f8c-a24a-47f2-968b-1a71240711c3, name)
+** value missing **
+```
+```
+User.update(eadb8f8c-a24a-47f2-968b-1a7124071)
 ** not instance found **
 ```
 
 ## Installation
 Clone this repo and execute the **./console.py** file
+```
+ git clone https://github.com/ojo-perezoso/AirBnB_clone
+ cd AirBnB_clone
+ ./console.py
+```
 
 Camila Abdala <3962@holbertonschool.com>
 Martin Casamayou <martin@casamayou.net>
