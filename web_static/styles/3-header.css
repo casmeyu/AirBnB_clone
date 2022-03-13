@@ -9,6 +9,7 @@ header {
     background-repeat: no-repeat;
     background-position: 20px;
     border-bottom: 1px solid #CCCCCC;
+    z-index: 1000;
 }
 
 header + .container {

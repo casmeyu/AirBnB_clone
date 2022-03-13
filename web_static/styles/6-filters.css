@@ -1,5 +1,6 @@
 .filters {
     display: flex;
+    position: relative !important;
     align-items: center;
 
     width: 100%;
@@ -63,8 +64,12 @@
 .filters .popover {
     display: none;
     padding: 1rem 0 0 2rem;
+    min-width: 25%;
+
     border: 1px solid #DDDDDD;
     border-radius: 4px;
+    z-index: 999;
+
 }
 .filters .popover ul {
     padding: 0;

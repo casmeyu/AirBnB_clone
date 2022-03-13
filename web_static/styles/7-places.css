@@ -1,0 +1,25 @@
+.places .wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+
+}
+.places h1 {
+    margin-bottom: .2rem;
+    font-size: 30px;
+}
+
+.places .wrapper article {
+    margin: 20px;
+    padding: 20px;
+
+    width: 390px;
+    border: 1px solid #FF5A5F;
+    border-radius: 4px;
+    text-align: center;
+}
+.places .wrapper article h2 {
+    margin: 0;
+    font-size: 30px;
+}
